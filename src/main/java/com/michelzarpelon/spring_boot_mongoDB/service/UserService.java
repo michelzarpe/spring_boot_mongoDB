@@ -41,6 +41,9 @@ public class UserService {
 		return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
 	}
 	
+	public User update(User obj) {
+		return objRepository.save(obj);
+	}
 
 
 }

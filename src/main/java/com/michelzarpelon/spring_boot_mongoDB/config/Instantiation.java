@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import com.michelzarpelon.spring_boot_mongoDB.DTO.AuthorDTO;
+import com.michelzarpelon.spring_boot_mongoDB.DTO.ComentarioDTO;
 import com.michelzarpelon.spring_boot_mongoDB.domain.Post;
 import com.michelzarpelon.spring_boot_mongoDB.domain.User;
 import com.michelzarpelon.spring_boot_mongoDB.repository.PostRepository;
@@ -39,8 +40,13 @@ public class Instantiation implements CommandLineRunner {
 		Post p1 = new Post(null, sdf.parse("21/03/2018"),"Partiu Viagem", "vou viajar para joaçaba",new AuthorDTO(maria));
 		Post p2 = new Post(null, sdf.parse("23/03/2018"),"Bom dia", "Acordei de Boa hoje",new AuthorDTO(maria));
 		
-
-
+		ComentarioDTO cm1 = new ComentarioDTO("Boa Viagem mano",sdf.parse("21/03/2018"),new AuthorDTO(alex));
+		ComentarioDTO cm2 = new ComentarioDTO("Aproveite",sdf.parse("22/03/2018"),new AuthorDTO(bob));
+		ComentarioDTO cm3= new ComentarioDTO("Bom dia!",sdf.parse("23/03/2018"),new AuthorDTO(alex));
+		
+		p1.getComentario().addAll(Arrays.asList(cm1,cm2));
+		p2.getComentario().addAll(Arrays.asList(cm3));
+		
 		postRepository.saveAll(Arrays.asList(p1,p2));
 		maria.getPosts().addAll(Arrays.asList(p1,p2));
 		userRepository.saveAll(Arrays.asList(maria));

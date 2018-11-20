@@ -1,5 +1,6 @@
 package com.michelzarpelon.spring_boot_mongoDB.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,4 +26,8 @@ public class PostService {
 		return objRepository.findByTitle(text);
 	}
 
+	public List<Post> fullSearch(String text, Date minDate, Date maxDate){
+		return objRepository.fullSearch(text, minDate, maxDate);
+	}
+		
 }

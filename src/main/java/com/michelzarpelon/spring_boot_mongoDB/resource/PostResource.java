@@ -1,5 +1,6 @@
 package com.michelzarpelon.spring_boot_mongoDB.resource;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,20 @@ public class PostResource {
 
 		return ResponseEntity.ok().body(obj);
 	}
+	
+	
+	
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/fullsearch")
+	public ResponseEntity<List<Post>> fullSearch(@RequestParam(value = "text", defaultValue = "") String text,
+												 @RequestParam(value = "text", defaultValue = "") String minDate,
+												 @RequestParam(value = "text", defaultValue = "") String maxDate) {
+		//Data nao ta convertendo certo, verificar.. preguiça e nao fui ver
+		
+		List<Post> obj = service.fullSearch(URL.decodeParam(text), URL.convertDate(minDate, new Date(0L)), URL.convertDate(maxDate,new Date()));
+
+		return ResponseEntity.ok().body(obj);
+	}
+	
 
 }
